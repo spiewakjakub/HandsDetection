@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace HandsDetection
 {
@@ -27,19 +28,15 @@ namespace HandsDetection
                 var matrixFromCamera = new Mat();
                 Webcam.Retrieve(matrixFromCamera);
 
-                var computedImages = ComputeVision.Compute(matrixFromCamera);
-                computedImages.Keys.ToList().ForEach(key =>
+                Application.Current.Dispatcher.Invoke(delegate
                 {
-                    var a = windowImages.TryGetValue(key, value: out Image windowImage);
-                    if (computedImages.TryGetValue(key, value: out BitmapSource computedImage) && a)
-                    {
-                        Application.Current.Dispatcher.Invoke(
-                            delegate
-                            {
-                                windowImage.Source = computedImage;
-                                Console.WriteLine(computedImage);
-                            });
-                    }
+                    var computedImages = ComputeVision.Compute(matrixFromCamera);
+                    computedImages.Keys.ToList().ForEach(key => {
+                        if (computedImages.TryGetValue(key, out var computedImage) && windowImages.TryGetValue(key, out var windowImage))
+                        {
+                            windowImage.Source = computedImage;
+                        }
+                    });
                 });
             };
         }
