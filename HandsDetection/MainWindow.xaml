@@ -9,6 +9,11 @@
         Loaded="Window_Loaded"
         Closed="Window_Closed">
     <Grid>
-        <Image x:Name="Main"></Image>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="Main" Grid.Column="0"></Image>
+        <Image x:Name="Computed" Grid.Column="1"></Image>
     </Grid>
 </Window>

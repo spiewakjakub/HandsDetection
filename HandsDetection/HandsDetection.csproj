@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ComputeVision.cs" />
+    <Compile Include="FrameCounter.cs" />
     <Compile Include="ImagesConverter.cs" />
     <Compile Include="ImageEnum.cs" />
     <Compile Include="WebcamHandler.cs" />

@@ -9,5 +9,6 @@ namespace HandsDetection
     enum ImageEnum
     {
         Main,
+        Computed
     }
 }

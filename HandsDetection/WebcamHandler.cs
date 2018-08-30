@@ -14,11 +14,13 @@ namespace HandsDetection
     class WebcamHandler
     {
         private VideoCapture Webcam;
+        private MainWindow Window;
 
 
-        public WebcamHandler()
+        public WebcamHandler(MainWindow window)
         {
             Webcam = new VideoCapture(0);
+            Window = window;
         }
 
         public void AddImagesHandler(Dictionary<ImageEnum, Image> windowImages)
@@ -27,11 +29,13 @@ namespace HandsDetection
             {
                 var matrixFromCamera = new Mat();
                 Webcam.Retrieve(matrixFromCamera);
-
+                
                 Application.Current.Dispatcher.Invoke(delegate
                 {
+                    Window.SetTitle(FrameCounter.CalculateFrameRate().ToString());
                     var computedImages = ComputeVision.Compute(matrixFromCamera);
-                    computedImages.Keys.ToList().ForEach(key => {
+                    computedImages.Keys.ToList().ForEach(key =>
+                    {
                         if (computedImages.TryGetValue(key, out var computedImage) && windowImages.TryGetValue(key, out var windowImage))
                         {
                             windowImage.Source = computedImage;

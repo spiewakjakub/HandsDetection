@@ -15,15 +15,15 @@ namespace HandsDetection
         {
             using (System.Drawing.Bitmap source = image.Bitmap)
             {
-                IntPtr ptr = source.GetHbitmap(); //obtain the Hbitmap
+                IntPtr ptr = source.GetHbitmap();
 
-                BitmapSource bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                BitmapSource bitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                     ptr,
                     IntPtr.Zero,
                     Int32Rect.Empty,
                     System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
                 DeleteObject(ptr);
-                return bs;
+                return bitmap;
             }
         }
     }
