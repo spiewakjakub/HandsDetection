@@ -27,12 +27,15 @@ namespace HandsDetection
         {
             Webcam.ImageGrabbed += delegate
             {
+                Application.Current.Dispatcher.Invoke(delegate
+                {
+                    Window.SetTitle(FrameCounter.CalculateFrameRate().ToString());
+                });
                 var matrixFromCamera = new Mat();
                 Webcam.Retrieve(matrixFromCamera);
                 
                 Application.Current.Dispatcher.Invoke(delegate
                 {
-                    Window.SetTitle(FrameCounter.CalculateFrameRate().ToString());
                     var computedImages = ComputeVision.Compute(matrixFromCamera);
                     computedImages.Keys.ToList().ForEach(key =>
                     {
