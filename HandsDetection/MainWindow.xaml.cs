@@ -29,11 +29,8 @@ namespace HandsDetection
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var imagesWPF = new Dictionary<ImageEnum, Image>();
             camera = new WebcamHandler(this);
-            imagesWPF.Add(ImageEnum.Main, Main);
-            imagesWPF.Add(ImageEnum.Computed, Computed);
-            camera.AddImagesHandler(imagesWPF);
+            camera.AddImagesHandler();
             
             camera.Start();
         }

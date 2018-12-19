@@ -5,15 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HandsDetection"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="450" Width="480"
         Loaded="Window_Loaded"
         Closed="Window_Closed">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Image x:Name="Main" Grid.Column="0"></Image>
-        <Image x:Name="Computed" Grid.Column="1"></Image>
+        <Image x:Name="MainImage"></Image>
     </Grid>
 </Window>

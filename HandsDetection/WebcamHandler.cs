@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,27 +24,16 @@ namespace HandsDetection
             Window = window;
         }
 
-        public void AddImagesHandler(Dictionary<ImageEnum, Image> windowImages)
+        public void AddImagesHandler()
         {
             Webcam.ImageGrabbed += delegate
             {
-                Application.Current.Dispatcher.Invoke(delegate
-                {
-                    Window.SetTitle(FrameCounter.CalculateFrameRate().ToString());
-                });
                 var matrixFromCamera = new Mat();
                 Webcam.Retrieve(matrixFromCamera);
                 
                 Application.Current.Dispatcher.Invoke(delegate
                 {
-                    var computedImages = ComputeVision.Compute(matrixFromCamera);
-                    computedImages.Keys.ToList().ForEach(key =>
-                    {
-                        if (computedImages.TryGetValue(key, out var computedImage) && windowImages.TryGetValue(key, out var windowImage))
-                        {
-                            windowImage.Source = computedImage;
-                        }
-                    });
+                    Window.MainImage.Source = ComputeVision.Compute(matrixFromCamera); 
                 });
             };
         }
