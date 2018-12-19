@@ -31,7 +31,7 @@ namespace HandsDetection
             var rects = new List<Rectangle>(decetded);
             if (rects.Capacity == 0)
                 return ImagesConverter.ToBitmapSource(mat);
-            rects.Sort((rect1, rect2) => rect1.Height.CompareTo(rect2.Height));
+            rects.Sort((rect1, rect2) => rect1.Height.CompareTo(rect2.Height)); 
             var rect = rects[0];
             SetCursorPos(
                     (int)((rect.X / Application.Current.MainWindow.ActualWidth) * System.Windows.SystemParameters.PrimaryScreenWidth), 
