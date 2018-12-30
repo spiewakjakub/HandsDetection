@@ -26,8 +26,6 @@ namespace HandsDetection
             var gray = mat.ToImage<Gray, byte>();
             var decetded = cascadeClassifier.DetectMultiScale(gray);
 
-            //foreach (var rect in decetded)
-            //{
             var rects = new List<Rectangle>(decetded);
             if (rects.Capacity == 0)
                 return ImagesConverter.ToBitmapSource(mat);
@@ -37,7 +35,7 @@ namespace HandsDetection
                     (int)((rect.X / Application.Current.MainWindow.ActualWidth) * System.Windows.SystemParameters.PrimaryScreenWidth), 
                     (int)((rect.Y / Application.Current.MainWindow.ActualHeight) * System.Windows.SystemParameters.PrimaryScreenHeight));
                 colourful.Draw(rect, new Bgr(255, 255, 0), 3);
-            //}
+            
             
             return ImagesConverter.ToBitmapSource(colourful.Mat);
         }
